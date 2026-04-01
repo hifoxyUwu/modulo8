@@ -1,6 +1,6 @@
 import uuid
 
-class Conta:
+class ContaCliente:
     def __init__(self,nome,saldo=0):
         self.id=str(uuid.uuid4())[:8]
         self.nome=nome
@@ -17,12 +17,12 @@ class Conta:
 
 class Banco:
     def __init__(self):
-        self.contas={}
+        self.ContaCliente={}
 
     def criar(self):
         n=input("nome:")
-        c=Conta(n)
-        self.contas[c.id]=c
+        c=ContaCliente(n)
+        self.ContaCliente[c.id]=c
         print("criado",c.id)
 
 b=Banco()
@@ -35,31 +35,32 @@ while True:
         b.criar()
 
     elif op=="2":
-        for c in b.contas.values():print(c.id,c.nome,c.saldo)
+        for c in b.ContaCliente.values():print(c.id,c.nome,c.saldo)
 
     elif op=="3":
         i=input("id:")
         v=float(input())
-        if i in b.contas:b.contas[i].depositar(v)
+        if i in b.ContaCliente:b.ContaCliente[i].depositar(v)
 
     elif op=="4":
+
         i=input("id:")
         v=float(input())
-        if i in b.contas:b.contas[i].sacar(v)
+        if i in b.ContaCliente:b.ContaCliente[i].sacar(v)
 
     elif op=="5":
         o=input();d=input();v=float(input())
-        if o in b.contas and d in b.contas:
-            if b.contas[o].saldo>=v:
-                b.contas[o].saldo-=v
-                b.contas[d].saldo+=v
+        if o in b.ContaCliente and d in b.ContaCliente:
+            if b.ContaCliente[o].saldo>=v:
+                b.ContaCliente[o].saldo-=v
+                b.ContaCliente[d].saldo+=v
 
     elif op=="6":
         i=input()
-        if i in b.contas:
-            for h in b.contas[i].historico:print(h)
+        if i in b.ContaCliente:
+            for h in b.ContaCliente[i].historico:print(h)
 
     elif op=="7":
         break
-
-
+    else:
+        print ('erro')
